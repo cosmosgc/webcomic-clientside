@@ -23,7 +23,7 @@
           }
           </style><script type="text/javascript" src="" async=""></script><meta http-equiv="origin-trial" content="A+cA2PUOfIOKAdSDJOW5CP9ZlxONy1yu+hqAq72zUtKw4rLdihqRp6Nui/jUyCyegr+BUtH+C+Elv0ufn05yBQEAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+zsdH3aNZT/bkjT8U/o5ACzyaeNYzTvtoVmwf/KOilfv39pxY2AIsOwhQJv+YnXp98i3TqrQibIVtMWs5UHjgoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AxceVEhIegcDEHqLXFQ2+vPKqzCppoJYsRCZ/BdfVnbM/sUUF2BXV8lwNosyYjvoxnTh2FC8cOlAnA5uULr/zAUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><script src="" async=""></script><iframe src="./Vast Error _ Deconreconstruction_files/container.html" style="visibility: hidden; display: none;"></iframe></head>
 
-<body class="layout-default" onload="loadComic()">
+<body class="layout-default">
     <header id="header-container">
         <nav>
                 <ul id="primary-nav">
@@ -101,8 +101,7 @@
     <footer id="footer-container"></footer>
 
 <script>
-	function loadComic(){
-		var pagesURL = "./pages/"
+        var pagesURL = "./pages/"
         var urlParams;
         (window.onpopstate = function () {
         var match,
@@ -124,33 +123,18 @@
         next.href="?page="+(urlParams["page"]*1+1);
         back.href="?page="+(urlParams["page"]*1-1);
 
-        var contentPath = pagesURL + urlParams["page"] + "/" + "content.html";
-        var commandPath = pagesURL + (urlParams["page"]*1+1) + "/" + "command.txt";
-        var titlePath = pagesURL + urlParams["page"] + "/" + "command.txt";
+        //var contentPath = pagesURL + urlParams["page"] + "/" + "content.html";
+        //var commandPath = pagesURL + (urlParams["page"]*1+1) + "/" + "command.txt";
+        //var titlePath = pagesURL + urlParams["page"] + "/" + "command.txt";
 
-
-
-        console.log(contentPath);
-        fetch(contentPath)
-                .then(response => response.text())
-                .then(text => content.innerHTML = text);
-        fetch(commandPath)
-                .then(response => response.text())
-                .then()
-                .then((result) => {
-                        next.innerHTML = "<spam>" + result + "</spam>";
-                        console.log(result);
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-                });
-                
-        fetch(titlePath)
-                .then(response => response.text())
-                .then(text => title.innerHTML = "<spam>" + text + "</spam>")
-                .catch((error) => {
-                        console.error('Error:', error);
-                });
-	}
+        fetch('./VastErrorPTBR.json', { 
+        method: 'GET'
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(json) {
+        content.innerHTML = json[urlParams["page"]].content;
+        title.innerHTML = json[urlParams["page"]].command;
+        next.innerHTML = json[urlParams["page"]*1+1].command;
+        });
 </script>
 <iframe src="./Vast Error _ Deconreconstruction_files/syncframe.html" width="0" height="0" frameborder="0" title="Criteo GUM iframe" style="border-width: 0px; margin: 0px; display: none;"></iframe></body></html>
